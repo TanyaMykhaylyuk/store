@@ -1,8 +1,8 @@
 export default function HomePage() {
   return (
     <main>
-      <h1>Store</h1>
-      <p>Initial setup.</p>
+      <h1>Bookstore</h1>
+      <p>Buy books online.</p>
     </main>
   );
 }
