@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Book } from "@store/types";
 
 type BooksResponse = {
@@ -26,7 +27,9 @@ export default async function HomePage() {
       <ul>
         {books.map((book) => (
           <li key={book.id}>
-            {book.title} — {book.author} ({book.price})
+            <Link href={`/books/${book.id}`}>
+              {book.title} — {book.author} ({book.price})
+            </Link>
           </li>
         ))}
       </ul>
