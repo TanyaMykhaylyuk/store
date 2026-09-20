@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Book } from "@store/types";
+import { AddToCartButton } from "./add-to-cart-button";
 
 type BookResponse = {
   data: Book;
@@ -38,6 +39,7 @@ export default async function BookPage({
       <h1>{book.title}</h1>
       <p>{book.author}</p>
       <p>{book.price}</p>
+      <AddToCartButton bookId={book.id} />
     </main>
   );
 }

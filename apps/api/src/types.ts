@@ -4,3 +4,8 @@ export type Book = {
   author: string;
   price: number;
 };
+
+export type CartItem = {
+  bookId: string;
+  quantity: number;
+};
