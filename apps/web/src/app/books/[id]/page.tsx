@@ -35,6 +35,8 @@ export default async function BookPage({
     <main>
       <p>
         <Link href="/">Back</Link>
+        {" · "}
+        <Link href="/cart">Cart</Link>
       </p>
       <h1>{book.title}</h1>
       <p>{book.author}</p>

@@ -24,6 +24,9 @@ export default async function HomePage() {
     <main>
       <h1>Bookstore</h1>
       <p>Buy books online.</p>
+      <p>
+        <Link href="/cart">Cart</Link>
+      </p>
       <ul>
         {books.map((book) => (
           <li key={book.id}>
