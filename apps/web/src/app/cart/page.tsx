@@ -35,6 +35,10 @@ async function getBooks(): Promise<Book[]> {
 
 export default async function CartPage() {
   const [items, books] = await Promise.all([getCart(), getBooks()]);
+  const total = items.reduce((sum, item) => {
+    const book = books.find((entry) => entry.id === item.bookId);
+    return sum + (book?.price ?? 0) * item.quantity;
+  }, 0);
 
   return (
     <main>
@@ -53,6 +57,7 @@ export default async function CartPage() {
           );
         })}
       </ul>
+      <p>{total}</p>
     </main>
   );
 }
