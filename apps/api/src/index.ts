@@ -59,6 +59,18 @@ app.post("/api/cart", (req, res) => {
   res.status(201).json({ data: cart });
 });
 
+app.delete("/api/cart/:bookId", (req, res) => {
+  const index = cart.findIndex((item) => item.bookId === req.params.bookId);
+
+  if (index === -1) {
+    res.status(404).json({ error: "Cart item not found" });
+    return;
+  }
+
+  cart.splice(index, 1);
+  res.json({ data: cart });
+});
+
 app.listen(port, () => {
   console.log(`API listening on http://localhost:${port}`);
 });

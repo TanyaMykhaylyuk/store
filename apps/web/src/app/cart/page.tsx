@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Book, CartItem } from "@store/types";
+import { RemoveFromCartButton } from "./remove-from-cart-button";
 
 type CartResponse = {
   data: CartItem[];
@@ -52,7 +53,8 @@ export default async function CartPage() {
 
           return (
             <li key={item.bookId}>
-              {book?.title ?? item.bookId} × {item.quantity}
+              {book?.title ?? item.bookId} × {item.quantity}{" "}
+              <RemoveFromCartButton bookId={item.bookId} />
             </li>
           );
         })}
