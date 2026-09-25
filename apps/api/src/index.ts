@@ -71,6 +71,16 @@ app.delete("/api/cart/:bookId", (req, res) => {
   res.json({ data: cart });
 });
 
+app.post("/api/checkout", (_req, res) => {
+  if (cart.length === 0) {
+    res.status(400).json({ error: "Cart is empty" });
+    return;
+  }
+
+  cart.length = 0;
+  res.json({ ok: true });
+});
+
 app.listen(port, () => {
   console.log(`API listening on http://localhost:${port}`);
 });

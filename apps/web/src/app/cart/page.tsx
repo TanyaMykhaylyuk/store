@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Book, CartItem } from "@store/types";
+import { CheckoutButton } from "./checkout-button";
 import { RemoveFromCartButton } from "./remove-from-cart-button";
 
 type CartResponse = {
@@ -60,6 +61,7 @@ export default async function CartPage() {
         })}
       </ul>
       <p>{total}</p>
+      {items.length > 0 ? <CheckoutButton /> : null}
     </main>
   );
 }
