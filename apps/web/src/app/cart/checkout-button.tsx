@@ -6,8 +6,11 @@ export function CheckoutButton() {
   const router = useRouter();
 
   async function checkout() {
-    await fetch("/api/checkout", { method: "POST" });
-    router.refresh();
+    const res = await fetch("/api/checkout", { method: "POST" });
+
+    if (res.ok) {
+      router.push("/order");
+    }
   }
 
   return (
