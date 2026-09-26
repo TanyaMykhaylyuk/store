@@ -1,7 +1,7 @@
 import "dotenv/config";
 import cors from "cors";
 import express from "express";
-import type { Book, CartItem } from "./types";
+import type { Book, CartItem, OrderItem } from "./types";
 
 const app = express();
 const port = Number(process.env.API_PORT ?? 4000);
@@ -12,6 +12,7 @@ const books: Book[] = [
 ];
 
 const cart: CartItem[] = [];
+let lastOrder: OrderItem[] = [];
 
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
@@ -71,14 +72,28 @@ app.delete("/api/cart/:bookId", (req, res) => {
   res.json({ data: cart });
 });
 
+app.get("/api/order", (_req, res) => {
+  res.json({ data: lastOrder });
+});
+
 app.post("/api/checkout", (_req, res) => {
   if (cart.length === 0) {
     res.status(400).json({ error: "Cart is empty" });
     return;
   }
 
+  lastOrder = cart.map((item) => {
+    const book = books.find((entry) => entry.id === item.bookId);
+
+    return {
+      title: book?.title ?? item.bookId,
+      quantity: item.quantity,
+      price: (book?.price ?? 0) * item.quantity,
+    };
+  });
+
   cart.length = 0;
-  res.json({ ok: true });
+  res.json({ data: lastOrder });
 });
 
 app.listen(port, () => {
