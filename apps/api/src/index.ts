@@ -12,6 +12,7 @@ const books: Book[] = [
 ];
 
 const cart: CartItem[] = [];
+const orders: OrderItem[][] = [];
 let lastOrder: OrderItem[] = [];
 
 app.use(cors({ origin: "http://localhost:3000" }));
@@ -76,6 +77,10 @@ app.get("/api/order", (_req, res) => {
   res.json({ data: lastOrder });
 });
 
+app.get("/api/orders", (_req, res) => {
+  res.json({ data: orders });
+});
+
 app.post("/api/checkout", (_req, res) => {
   if (cart.length === 0) {
     res.status(400).json({ error: "Cart is empty" });
@@ -92,6 +97,7 @@ app.post("/api/checkout", (_req, res) => {
     };
   });
 
+  orders.push(lastOrder);
   cart.length = 0;
   res.json({ data: lastOrder });
 });

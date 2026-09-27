@@ -26,6 +26,8 @@ export default async function HomePage() {
       <p>Buy books online.</p>
       <p>
         <Link href="/cart">Cart</Link>
+        {" · "}
+        <Link href="/orders">Orders</Link>
       </p>
       <ul>
         {books.map((book) => (
