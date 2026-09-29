@@ -48,20 +48,26 @@ export default async function CartPage() {
         <Link href="/">Back</Link>
       </p>
       <h1>Cart</h1>
-      <ul>
-        {items.map((item) => {
-          const book = books.find((entry) => entry.id === item.bookId);
+      {items.length === 0 ? (
+        <p>Cart is empty</p>
+      ) : (
+        <>
+          <ul>
+            {items.map((item) => {
+              const book = books.find((entry) => entry.id === item.bookId);
 
-          return (
-            <li key={item.bookId}>
-              {book?.title ?? item.bookId} × {item.quantity}{" "}
-              <RemoveFromCartButton bookId={item.bookId} />
-            </li>
-          );
-        })}
-      </ul>
-      <p>{total}</p>
-      {items.length > 0 ? <CheckoutButton /> : null}
+              return (
+                <li key={item.bookId}>
+                  {book?.title ?? item.bookId} × {item.quantity}{" "}
+                  <RemoveFromCartButton bookId={item.bookId} />
+                </li>
+              );
+            })}
+          </ul>
+          <p>{total}</p>
+          <CheckoutButton />
+        </>
+      )}
     </main>
   );
 }
