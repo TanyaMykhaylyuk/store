@@ -26,22 +26,26 @@ export default async function OrdersPage() {
         <Link href="/">Back</Link>
       </p>
       <h1>Orders</h1>
-      {orders.map((items, index) => {
-        const total = items.reduce((sum, item) => sum + item.price, 0);
+      {orders.length === 0 ? (
+        <p>No orders yet</p>
+      ) : (
+        orders.map((items, index) => {
+          const total = items.reduce((sum, item) => sum + item.price, 0);
 
-        return (
-          <section key={index}>
-            <ul>
-              {items.map((item) => (
-                <li key={item.title}>
-                  {item.title} × {item.quantity}
-                </li>
-              ))}
-            </ul>
-            <p>{total}</p>
-          </section>
-        );
-      })}
+          return (
+            <section key={index}>
+              <ul>
+                {items.map((item) => (
+                  <li key={item.title}>
+                    {item.title} × {item.quantity}
+                  </li>
+                ))}
+              </ul>
+              <p>{total}</p>
+            </section>
+          );
+        })
+      )}
     </main>
   );
 }
