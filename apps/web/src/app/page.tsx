@@ -17,8 +17,17 @@ async function getBooks(): Promise<Book[]> {
   return json.data;
 }
 
-export default async function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const { q = "" } = await searchParams;
   const books = await getBooks();
+  const query = q.trim().toLowerCase();
+  const visible = query
+    ? books.filter((book) => book.title.toLowerCase().includes(query))
+    : books;
 
   return (
     <main>
@@ -29,15 +38,23 @@ export default async function HomePage() {
         {" · "}
         <Link href="/orders">Orders</Link>
       </p>
-      <ul>
-        {books.map((book) => (
-          <li key={book.id}>
-            <Link href={`/books/${book.id}`}>
-              {book.title} — {book.author} ({book.price})
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <form>
+        <input name="q" defaultValue={q} />
+        <button type="submit">Search</button>
+      </form>
+      {visible.length === 0 ? (
+        <p>No books found</p>
+      ) : (
+        <ul>
+          {visible.map((book) => (
+            <li key={book.id}>
+              <Link href={`/books/${book.id}`}>
+                {book.title} — {book.author} ({book.price})
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </main>
   );
 }
