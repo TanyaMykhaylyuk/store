@@ -26,7 +26,11 @@ export default async function HomePage({
   const books = await getBooks();
   const query = q.trim().toLowerCase();
   const visible = query
-    ? books.filter((book) => book.title.toLowerCase().includes(query))
+    ? books.filter(
+        (book) =>
+          book.title.toLowerCase().includes(query) ||
+          book.author.toLowerCase().includes(query),
+      )
     : books;
 
   return (
