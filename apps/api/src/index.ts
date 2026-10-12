@@ -61,6 +61,24 @@ app.post("/api/cart", (req, res) => {
   res.status(201).json({ data: cart });
 });
 
+app.patch("/api/cart/:bookId", (req, res) => {
+  const item = cart.find((entry) => entry.bookId === req.params.bookId);
+
+  if (!item) {
+    res.status(404).json({ error: "Cart item not found" });
+    return;
+  }
+
+  item.quantity -= 1;
+
+  if (item.quantity === 0) {
+    const index = cart.findIndex((entry) => entry.bookId === req.params.bookId);
+    cart.splice(index, 1);
+  }
+
+  res.json({ data: cart });
+});
+
 app.delete("/api/cart/:bookId", (req, res) => {
   const index = cart.findIndex((item) => item.bookId === req.params.bookId);
 
