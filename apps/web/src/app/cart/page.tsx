@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Book, CartItem } from "@store/types";
 import { CheckoutButton } from "./checkout-button";
 import { DecreaseCartButton } from "./decrease-cart-button";
+import { IncreaseCartButton } from "./increase-cart-button";
 import { RemoveFromCartButton } from "./remove-from-cart-button";
 
 type CartResponse = {
@@ -61,6 +62,7 @@ export default async function CartPage() {
                 <li key={item.bookId}>
                   {book?.title ?? item.bookId} × {item.quantity}{" "}
                   <DecreaseCartButton bookId={item.bookId} />{" "}
+                  <IncreaseCartButton bookId={item.bookId} />{" "}
                   <RemoveFromCartButton bookId={item.bookId} />
                 </li>
               );
