@@ -60,7 +60,8 @@ export default async function CartPage() {
 
               return (
                 <li key={item.bookId}>
-                  {book?.title ?? item.bookId} × {item.quantity}{" "}
+                  {book?.title ?? item.bookId} × {item.quantity} —{" "}
+                  {(book?.price ?? 0) * item.quantity}{" "}
                   <DecreaseCartButton bookId={item.bookId} />{" "}
                   <IncreaseCartButton bookId={item.bookId} />{" "}
                   <RemoveFromCartButton bookId={item.bookId} />
