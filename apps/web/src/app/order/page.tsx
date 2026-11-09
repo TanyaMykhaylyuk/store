@@ -27,7 +27,7 @@ export default async function OrderPage() {
       <ul>
         {items.map((item) => (
           <li key={item.title}>
-            {item.title} × {item.quantity}
+            {item.title} × {item.quantity} — {item.price}
           </li>
         ))}
       </ul>
