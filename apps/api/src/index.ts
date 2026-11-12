@@ -91,6 +91,11 @@ app.delete("/api/cart/:bookId", (req, res) => {
   res.json({ data: cart });
 });
 
+app.delete("/api/cart", (_req, res) => {
+  cart.length = 0;
+  res.json({ data: cart });
+});
+
 app.get("/api/order", (_req, res) => {
   res.json({ data: lastOrder });
 });
