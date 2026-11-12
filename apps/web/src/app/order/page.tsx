@@ -24,14 +24,20 @@ export default async function OrderPage() {
   return (
     <main>
       <h1>Order placed</h1>
-      <ul>
-        {items.map((item) => (
-          <li key={item.title}>
-            {item.title} × {item.quantity} — {item.price}
-          </li>
-        ))}
-      </ul>
-      <p>{total}</p>
+      {items.length === 0 ? (
+        <p>No order yet</p>
+      ) : (
+        <>
+          <ul>
+            {items.map((item) => (
+              <li key={item.title}>
+                {item.title} × {item.quantity} — {item.price}
+              </li>
+            ))}
+          </ul>
+          <p>{total}</p>
+        </>
+      )}
       <p>
         <Link href="/">Back</Link>
         {" · "}
