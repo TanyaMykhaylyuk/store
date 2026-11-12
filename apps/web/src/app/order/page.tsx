@@ -34,6 +34,8 @@ export default async function OrderPage() {
       <p>{total}</p>
       <p>
         <Link href="/">Back</Link>
+        {" · "}
+        <Link href="/orders">Orders</Link>
       </p>
     </main>
   );
